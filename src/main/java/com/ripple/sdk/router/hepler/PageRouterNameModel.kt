@@ -1,43 +1,61 @@
 package com.ripple.sdk.router.hepler
 
-
 /**
- * Author: fanyafeng
- * Date: 2020/9/18 17:15
+ * Author： fanyafeng
+ * Date： 2020-01-07 18:02
  * Email: fanyafeng@live.cn
- * Description:
- *
- * 注解信息存放的实体类
  */
-data class PageRouterNameModel(
-
+class PageRouterNameModel {
     /**
-     * packageName.className
-     * 包名加类名的全称
+     * 包名加类名全称
+     * 用来通过反射生成类
      * 别名：pageClassName
      */
-    val pageClassName: String,
+    var pageClassName: String? = null
 
     /**
-     * 当前页面的名字
+     * 自定义的pageName
      */
-    val pageName: String,
+    var pageName: String? = null
 
     /**
-     * 跳转到当前页面需要用的名字
-     * 一般来说当前页面的名字和跳转名字相同
-     * 但是为了防止app升级或者业务变动，代码重构
-     * 原有的页面还存在但是需要更改跳转名称的情况
+     * 跳转名称
+     * 正常的类名字
      */
-    val forwardName: String,
+    var forwardName: String? = null
 
     /**
      * 是否需要登录
      */
-    val needLogin: Boolean,
+    var isNeedLogin = false
 
     /**
-     * 生成在类字段上的注释
+     * 生成类字段上的注释
      */
-    val note: String
-)
+    var note: String? = null
+
+    constructor() {}
+    constructor(
+        pageClassName: String?,
+        pageName: String?,
+        forwardName: String?,
+        needLogin: Boolean,
+        note: String?
+    ) {
+        this.pageClassName = pageClassName
+        this.pageName = pageName
+        this.forwardName = forwardName
+        this.isNeedLogin = needLogin
+        this.note = note
+    }
+
+    override fun toString(): String {
+        return "PageNameData{" +
+                "pageClassName='" + pageClassName + '\'' +
+                ", pageName='" + pageName + '\'' +
+                ", forwardName='" + forwardName + '\'' +
+                ", needLogin=" + isNeedLogin +
+                ", note='" + note + '\'' +
+                '}'
+    }
+}

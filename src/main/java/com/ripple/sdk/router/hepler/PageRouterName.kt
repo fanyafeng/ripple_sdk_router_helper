@@ -1,42 +1,46 @@
 package com.ripple.sdk.router.hepler
 
+import java.lang.annotation.Inherited
 
 /**
- * Author: fanyafeng
- * Date: 2020/9/18 15:58
+ * Author： fanyafeng
+ * Date： 2020-01-07 17:15
  * Email: fanyafeng@live.cn
- * Description:
  *
- * 路由页面注册
- * 会根据所有的注册信息生成相应的类，主要是string
- * 如果是首页跳转的话，防止一次性加入太多类的实例，而造成启动时间过长的问题
+ * 基于DMALL框架编写，如有更改请联系yafeng.fan@dmall.com
+ * 注解此类的必须要继承View
  */
+@MustBeDocumented
+@Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.BINARY)
+@Inherited
 annotation class PageRouterName(
-
     /**
-     * 生成类的全部链接，不能为空
-     * 因为默认值value，省去部分麻烦
+     * 生成类的全部链接,不能为空
+     * 此为以后所有value的key值
+     * 勿动
+     *
+     * @return
      */
     val value: String,
-
     /**
      * 生成的为pageName
-     * 如果为空则默认为类的全部大写字母
-     * 否则取当前的注解值
+     * 如果为空则默认为全部大写字母
+     * 否则取当前注解值
+     * @return
      */
     val pageName: String = "",
-
     /**
-     * 是否需要登录，一般现在都会获取用户信息，都需要登录，所以这里默认为true
-     * 如果不设置此值那么默认此页面需要登录
-     * 否则直接设置为false
+     * 是否需要登录，鉴于实际情况需要登录情况居多默认为true
+     * 如需登录此注解可空
+     * 否则直接设置为false即可
+     * @return
      */
-    val pageNeedLogin: Boolean = true,
-
+    val needLogin: Boolean = true,
     /**
-     * 页面的note信息，主要是给自己或者同事看
-     * 主要是解释此类的作用，或者是那个页面
+     * 此为note消息，主要是给自己或者同事看，最好加上
+     * 此类的作用或者是那个页面等等
+     * @return
      */
-    val pageNote: String = ""
-
+    val note: String = ""
 )
